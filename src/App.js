@@ -1,22 +1,33 @@
-import Turuncu from "./Turuncu";
 import React from "react";
+import Turuncu from "./Turuncu";
+
+import {TemaGlobal, KullaniciGlobal} from "./contexts/GlobalVeriler";
 
 function App() {
-  const[tema,temaGuncelle]=React.useState("acik")
+  const [tema, temaGuncelle] = React.useState("acik")
+  const [kullanici, kullaniciGuncelle] = React.useState({})
 
-  function temaDegistir(){
-    if(tema==="acik"){
+  React.useEffect(()=>{
+    kullaniciGuncelle({ad:"Ahmet", soyad:"Yılmaz"})
+  }, [])
+
+  function temaDegistir() {
+    if( tema === "acik" ) {
       temaGuncelle("koyu")
-    }else {
+    } else {
       temaGuncelle("acik")
     }
-
   }
+
   return (
-    <div className="container p3">
-   <h1 className="d-flex justify-content-between">Ana Compenent <button onClick={temaDegistir}>{tema==="acik"?"koyu":"acik" }</button></h1>
-   <Turuncu tema={tema}/>
-   </div>
+    <TemaGlobal.Provider value={tema}>
+      <KullaniciGlobal.Provider value={kullanici}>
+        <div className="container p-3">
+          <h1 className="d-flex justify-content-between">Ana Component  <button onClick={temaDegistir}>{tema==="acik"?"Koyu":"Açık"}</button> </h1>
+          <Turuncu />
+        </div>
+      </KullaniciGlobal.Provider>
+    </TemaGlobal.Provider>
   );
 }
 

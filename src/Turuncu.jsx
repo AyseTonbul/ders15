@@ -1,14 +1,13 @@
 import Yesil from "./Yesil"
 
-function Turuncu({tema}) {
-  return (
-    <div>
-    <h2>Turunucu Compenent</h2>
-    <Yesil tema={tema}/>
-    </div>
-    
+function Turuncu() {
 
-  )
+    return (
+        <div>
+            <h2>Turuncu component</h2>
+            <Yesil />
+        </div>
+    )
 }
 
 export default Turuncu
